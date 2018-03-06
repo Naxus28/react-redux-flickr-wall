@@ -14,8 +14,8 @@ const createStoreWithMiddleware =  compose(
 /**
  * Create Store with Thunk Middleware
  */
-export default function(initialState) {
-  const store = createStoreWithMiddleware(rootReducer, initialState);
+export default function() {
+  const store = createStoreWithMiddleware(rootReducer);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
