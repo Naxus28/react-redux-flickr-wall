@@ -1,6 +1,3 @@
-/*-------------------
-   Imports
---------------------*/
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
@@ -10,14 +7,14 @@ import registerServiceWorker from 'registerServiceWorker';
 
 import './css/styles.css';
 
-/*-------------------
-   Store
---------------------*/
+/**
+ * Store
+ */
 const store = configureStore();
 
-/*-------------------
-   Render
---------------------*/
+/**
+ * Render
+ */
 render(
 	<Provider store={store}>
 		<App />

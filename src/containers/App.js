@@ -1,15 +1,12 @@
-/*-------------------
-   Imports
---------------------*/
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchPhotos, fetchPhotos } from '../actions/index'
 import PhotoList from '../components/PhotoList'
 import SearchBar from '../components/SearchBar'
 
-/*-----------------------
-  App Container Component
-------------------------*/
+/**
+ * App Container Component
+ */
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,8 +16,8 @@ class App extends Component {
   // dispatch action on page load
   // because there is no keyword at this point, app fetches 'getRecent' API
   componentDidMount(){
-    const { dispatch, keyword } = this.props;
-    dispatch(fetchPhotos(keyword));
+    const { dispatch } = this.props;
+    dispatch(fetchPhotos());
   }
 
   // dispatch action if this.props !== nexProps
@@ -33,7 +30,7 @@ class App extends Component {
   }
 
   // dispatch action when user performs a search
-  // changes the state of the 'keywordInput' reducer (meaning it changes the keyword)
+  // changes the state of the 'keyword' reducer 
   handleSearchApi(keyword){
     const { dispatch } = this.props
     dispatch(searchPhotos(keyword));
@@ -41,13 +38,13 @@ class App extends Component {
 
   // react render method
   render(){
-    const { photosObj, keyword } = this.props;
+    const { flickrPhotos, keyword } = this.props;
 
     return(
       <div>
 
       {/* if app is about to start fetching API */}
-      { photosObj.isFetching &&
+      { flickrPhotos.isFetching &&
         <div className="loadingWrapper">
           <h2 className="loading">Loading Photos...</h2>
           <p className="spinner"><i className="fa fa-4x fa-spinner fa-spin" /></p>
@@ -55,34 +52,34 @@ class App extends Component {
       }
 
       {/* if API was fetched and returned an error */}
-      { photosObj.apiError &&
+      { flickrPhotos.apiError &&
         <div className="errorMessageWrapper">
-          <p className="apiError">{photosObj.errorMessage}</p>
+          <p className="apiError">{flickrPhotos.errorMessage}</p>
         </div>
       }
 
       {/* if API was fetched but there are no results */}
-      { !photosObj.isFetching &&
-        photosObj.photos.length === 0 &&
-        !photosObj.apiError &&
+      { !flickrPhotos.isFetching &&
+        flickrPhotos.photos.length === 0 &&
+        !flickrPhotos.apiError &&
         <div className="loadingWrapper">
           <h2 className="loading">No results for {keyword}</h2>
         </div>
       }
 
       {/* if API was fetched and there are results */}
-      { !photosObj.isFetching &&
-        photosObj.photos.length > 0 &&
+      { !flickrPhotos.isFetching &&
+        flickrPhotos.photos.length > 0 &&
         <div>
           <h2 className='header'>Flickr Photo Wall</h2>
-          <PhotoList photosObj={photosObj} keyword={keyword} />
+          <PhotoList photos={flickrPhotos.photos} keyword={keyword} />
           <SearchBar onClick={this.handleSearchApi} />
         </div>
       }
 
       {/* if API was fetched and there are no errors--there may or may not be results */}
-      { !photosObj.isFetching && 
-        !photosObj.apiError &&
+      { !flickrPhotos.isFetching && 
+        !flickrPhotos.apiError &&
         <div>
           <SearchBar onClick={this.handleSearchApi} />
         </div>
@@ -94,17 +91,16 @@ class App extends Component {
 }
 
 
-/*-----------------------
-   Map State to Props
-------------------------*/
-// returns the state of the app and 
-// passes it as props to the 'App' component 
-// via the 'connect' function below
+/**
+ * Map State to Props
+ * returns the state of the app and passes it as props to the 'App' component
+ * via the 'connect' function
+ */
 const mapStateToProps = (state) => {
   return {
-    photosObj: state.receveidPhotos,
-    keyword: state.keywordInput
+    flickrPhotos: state.flickrPhotos,
+    keyword: state.keyword
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);

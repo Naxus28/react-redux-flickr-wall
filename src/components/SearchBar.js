@@ -1,14 +1,11 @@
-/*-------------------
-   Imports
---------------------*/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-/*-------------------------------------
-   SearchBar presentational component
---------------------------------------*/
-// gets user input and passes it to 'handleSearchApi' inside 'App' component (callback)
-// 'handleSearchApi' dispatches 'searchPhotos(keyword)'
+/**
+ * SearchBar presentational component
+ * gets user input and passes it to 'handleSearchApi' inside 'App' component (callback)
+ * 'handleSearchApi' dispatches 'searchPhotos(keyword)'
+ */
 export default class SearchBar extends Component {
   render() {
     let input;

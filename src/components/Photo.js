@@ -1,14 +1,9 @@
-/*-------------------
-   Imports
---------------------*/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-/*-------------------------------------
-  PhotoList presentational component
---------------------------------------*/
-// gets props from 'PhotoList' component
-// renders images individually
+/**
+ * PhotoList presentational component
+ */
 export default class Photo extends Component {
   render() {
     const { photo } = this.props

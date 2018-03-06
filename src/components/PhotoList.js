@@ -1,17 +1,13 @@
-/*-------------------
-   Imports
---------------------*/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Photo from './Photo';
 
-
-/*-------------------------------------
-  PhotoList presentational component
---------------------------------------*/
+/**
+ * PhotoList presentational component
+ */
 export default class PhotoList extends Component {
   render() {
-    const { photosObj, keyword } = this.props;
+    const { photos, keyword } = this.props;
 
     return(
       <article> 
@@ -19,7 +15,7 @@ export default class PhotoList extends Component {
           ? <h3 className='getRecent_header'>Showing results from getRecent API</h3>
           : <h3 className="searchPhotos_header">Showing results for {keyword}</h3>
         }
-        {photosObj.photos.map((photo, index) =>
+        {photos.map((photo, index) =>
           <Photo 
             key={index} 
             photo={photo} />
@@ -30,7 +26,7 @@ export default class PhotoList extends Component {
 };
 
 PhotoList.propTypes = {
-  photosObj: PropTypes.object.isRequired,
+  photos: PropTypes.array.isRequired,
   keyword: PropTypes.string
 };
 
