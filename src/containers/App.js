@@ -8,7 +8,7 @@ import PhotoList from '../components/PhotoList'
 import SearchBar from '../components/SearchBar'
 
 /*-----------------------
-   App Container Component
+  App Container Component
 ------------------------*/
 class App extends Component {
   constructor(props) {
@@ -16,15 +16,15 @@ class App extends Component {
     this.handleSearchApi = this.handleSearchApi.bind(this);
   }
 
-  //dispatch action on page load
-  //because there is no keyword at this point, app fetches 'getRecent' API
+  // dispatch action on page load
+  // because there is no keyword at this point, app fetches 'getRecent' API
   componentDidMount(){
     const { dispatch, keyword } = this.props;
     dispatch(fetchPhotos(keyword));
   }
 
-  //dispatch action if this.props !== nexProps
-  //meaning, if the new keyword is different than the previous keyword
+  // dispatch action if this.props !== nexProps
+  // meaning, if the new keyword is different than the previous keyword
   componentWillReceiveProps(nextProps) { 
     if (nextProps.keyword !== this.props.keyword) {
       const { dispatch, keyword } = nextProps;
@@ -32,21 +32,21 @@ class App extends Component {
     }
   }
 
-  //dispatch action when user performs a search
-  //changes the state of the 'keywordInput' reducer (meaning it changes the keyword)
+  // dispatch action when user performs a search
+  // changes the state of the 'keywordInput' reducer (meaning it changes the keyword)
   handleSearchApi(keyword){
     const { dispatch } = this.props
     dispatch(searchPhotos(keyword));
   }
 
-  //react render method
+  // react render method
   render(){
     const { photosObj, keyword } = this.props;
 
     return(
       <div>
 
-      {/*if app is about to start fetching API*/}
+      {/* if app is about to start fetching API */}
       { photosObj.isFetching &&
         <div className="loadingWrapper">
           <h2 className="loading">Loading Photos...</h2>
@@ -54,14 +54,14 @@ class App extends Component {
         </div>
       }
 
-      {/*if API was fetched and returned an error*/}
+      {/* if API was fetched and returned an error */}
       { photosObj.apiError &&
         <div className="errorMessageWrapper">
           <p className="apiError">{photosObj.errorMessage}</p>
         </div>
       }
 
-      {/*if API was fetched but there are no results*/}
+      {/* if API was fetched but there are no results */}
       { !photosObj.isFetching &&
         photosObj.photos.length === 0 &&
         !photosObj.apiError &&
@@ -70,23 +70,24 @@ class App extends Component {
         </div>
       }
 
-      {/*if API was fetched and there are results*/}
+      {/* if API was fetched and there are results */}
       { !photosObj.isFetching &&
         photosObj.photos.length > 0 &&
-        !photosObj.apiError &&
         <div>
+          <h2 className='header'>Flickr Photo Wall</h2>
           <PhotoList photosObj={photosObj} keyword={keyword} />
           <SearchBar onClick={this.handleSearchApi} />
         </div>
       }
 
-      {/*if API was fetched and there are no errors--there may or may not be results*/}
-      {!photosObj.isFetching && 
+      {/* if API was fetched and there are no errors--there may or may not be results */}
+      { !photosObj.isFetching && 
         !photosObj.apiError &&
         <div>
           <SearchBar onClick={this.handleSearchApi} />
         </div>
       }
+      
       </div>
     );
   }
@@ -96,17 +97,13 @@ class App extends Component {
 /*-----------------------
    Map State to Props
 ------------------------*/
-//returns the state of the app and 
-//passes it as props to the 'App' component 
-//via the 'connect' function below
+// returns the state of the app and 
+// passes it as props to the 'App' component 
+// via the 'connect' function below
 const mapStateToProps = (state) => {
-  // console.log('state: ', state);
-  const photosObj = state.receveidPhotos;
-  const keyword = state.keywordInput;
-
   return {
-    photosObj,
-    keyword
+    photosObj: state.receveidPhotos,
+    keyword: state.keywordInput
   }
 }
 
