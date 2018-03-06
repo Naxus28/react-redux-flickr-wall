@@ -1,0 +1,36 @@
+{
+  "name": "flickr-wall",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.17",
+    "redux-devtools": "3.4.1",
+    "redux-logger": "3.0.6"
+  },
+  "dependencies": {
+    "fs-toolkit-react": "git+http://git.fullsail.com/community/fs-toolkit-react.git#d9a4043958b7ed346a1d1a015a803acc2c185adf",
+    "history": "4.7.2",
+    "immutable": "3.8.2",
+    "moment": "2.20.1",
+    "moment-range": "3.1.0",
+    "moment-timezone": "0.5.14",
+    "prop-types": "^15.6.0",
+    "raven-js": "^3.21.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-loadable": "^5.3.1",
+    "react-redux": "5.0.6",
+    "react-router": "4.2.0",
+    "react-router-dom": "4.2.2",
+    "react-scripts": "1.0.17",
+    "redux": "3.7.2",
+    "redux-immutable": "^4.0.0",
+    "redux-thunk": "2.2.0"
+  },
+  "scripts": {
+    "start": "NODE_PATH=src react-scripts start",
+    "build": "NODE_PATH=src react-scripts build",
+    "test": "NODE_PATH=src react-scripts test --env=jsdom",
+    "eject": "NODE_PATH=src react-scripts eject"
+  }
+}
