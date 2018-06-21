@@ -23,10 +23,13 @@ export const SEARCH_PHOTOS      = 'SEARCH_PHOTOS';
   return dispatch => {
     // inform UI that an API request is about to be sent
     dispatch(processingPhotos());
+	  
+    const apiEndpoints = {
+	getRecentApi: `https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=cdb1c21715473a661cbfe89023718ab2&format=json&nojsoncallback=1`,
+	searchApi: `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=cdb1c21715473a661cbfe89023718ab2&tags=${keyword}&text=${keyword}&format=json&nojsoncallback=1`
+     };
     
-     let api = keyword
-                ? `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=cdb1c21715473a661cbfe89023718ab2&tags=${keyword}&text=${keyword}&format=json&nojsoncallback=1`
-                : `https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=cdb1c21715473a661cbfe89023718ab2&format=json&nojsoncallback=1`
+     let api = keyword ? apiEndpoints.searchApi : apiEndpoints.getRecentApi;
 
     return fetch(api)
       .then(response => response.json())
