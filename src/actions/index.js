@@ -6,7 +6,7 @@ import fetch from 'isomorphic-fetch';
 export const API_CALL_FAIL      = 'API_CALL_FAIL';
 export const PROCESSING_PHOTOS 	= 'PROCESSING_PHOTOS';
 export const RECEIVE_PHOTOS     = 'RECEIVE_PHOTOS';
-export const SEARCH_PHOTOS 		  = 'SEARCH_PHOTOS';
+export const SEARCH_PHOTOS      = 'SEARCH_PHOTOS';
 
 
 /**
